@@ -1,2 +1,2 @@
-# CT30A3370 Project 3
+# CT30A3370_Project3
 ## Custom shell
