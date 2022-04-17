@@ -25,7 +25,7 @@ int main(int argc, char * * argv) {
     printf("wish> ");
     
 
-    while (line = getline(&buffer,&bufsize, stdin) != NULL) {
+    while (getline(&buffer,&bufsize, stdin) != NULL) {
         
         //printf("Running: %s\n", buffer);
         if (strcmp(buffer, "exit\n") == 0) {
