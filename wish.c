@@ -5,20 +5,27 @@
 #include <sys/wait.h>
 #define die(msg) do {perror(msg); exit(EXIT_FAILURE);} while (0);
 
-#define BUFSIZE 80
 
 
 
 int main(int argc, char * * argv) {
-	char buffer[BUFSIZE];
+    char *buffer;
+    size_t bufsize = 160;
+    size_t line;
     pid_t cpid;
     int wstatus;
 
-    
+    buffer = (char *)malloc(bufsize * sizeof(char));
+    if( buffer == NULL)
+    {
+        perror("Unable to allocate buffer");
+        exit(1);
+    }
+
     printf("wish> ");
     
 
-    while (fgets(buffer, BUFSIZE, stdin) != NULL) {
+    while (line = getline(&buffer,&bufsize, stdin) != NULL) {
         
         //printf("Running: %s\n", buffer);
         if (strcmp(buffer, "exit\n") == 0) {
