@@ -7,24 +7,19 @@
 
 #define BUFSIZE 80
 
-void signal_handler(int signal) {
-    if (signal == SIGALRM) {
-        printf("Inactive for 15 seconds, exitting\n");
-        exit(0);
-    }
-}
+
 
 int main(int argc, char * * argv) {
 	char buffer[BUFSIZE];
     pid_t cpid;
     int wstatus;
 
-    signal(SIGINT, signal_handler);
-    printf("wish $ ");
-    alarm(15);
+    
+    printf("wish> ");
+    
 
     while (fgets(buffer, BUFSIZE, stdin) != NULL) {
-        alarm(15);
+        
         //printf("Running: %s\n", buffer);
         if (strcmp(buffer, "exit\n") == 0) {
             exit(0);
@@ -43,7 +38,7 @@ int main(int argc, char * * argv) {
 
             default:
                 waitpid(cpid, &wstatus, WUNTRACED | WCONTINUED);
-                printf("wish $ ");
+                printf("wish> ");
         }
     }
     return 0;
