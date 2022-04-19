@@ -11,7 +11,7 @@
 int main(int argc, char * * argv) {
     char *buffer;
     size_t bufsize = 160;
-    size_t line;
+    
     pid_t cpid;
     int wstatus;
 
@@ -26,11 +26,18 @@ int main(int argc, char * * argv) {
     
 
     while (getline(&buffer,&bufsize, stdin) != NULL) {
+        char s2[160];
+        strncpy(s2, buffer, sizeof(buffer));
+        char s1 = strtok(s2, " ");
         
-        //printf("Running: %s\n", buffer);
-        if (strcmp(buffer, "exit\n") == 0) {
+        
+        if (strcmp(s2, "exit\n") == 0) {
             exit(0);
             return 0;
+        }else if (strcmp(s2, "cd")== 0){
+            chdir(s1);
+        }else if(strcmp(s2,"path\n")){
+            printf("test");
         }
 
         switch(cpid = fork()) {
