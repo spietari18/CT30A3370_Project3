@@ -38,10 +38,10 @@ int main(int argc, char * * argv) {
             //printf(s1);
             chdir(s1);
             system("ls");
-        }else if(strcmp(s2,"path\n")){
+        }else if(strcmp(s2,"path\n")== 0){
             char cwd[1024];
             getcwd(cwd,sizeof(cwd));
-            printf("%s",cwd);
+            printf("%s\n",cwd);
 
         }
 
