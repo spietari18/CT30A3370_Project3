@@ -28,16 +28,21 @@ int main(int argc, char * * argv) {
     while (getline(&buffer,&bufsize, stdin) != NULL) {
         char s2[160];
         strncpy(s2, buffer, sizeof(buffer));
-        char s1 = strtok(s2, " ");
+        char s1 = strtok(s2, "\000");
         
         
         if (strcmp(s2, "exit\n") == 0) {
             exit(0);
             return 0;
         }else if (strcmp(s2, "cd")== 0){
+            //printf(s1);
             chdir(s1);
+            system("ls");
         }else if(strcmp(s2,"path\n")){
-            printf("test");
+            char cwd[1024];
+            getcwd(cwd,sizeof(cwd));
+            printf("%s",cwd);
+
         }
 
         switch(cpid = fork()) {
